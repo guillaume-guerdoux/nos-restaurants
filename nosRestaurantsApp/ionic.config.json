@@ -1,5 +1,13 @@
 {
   "name": "nosRestaurantsApp",
-  "integrations": {},
-  "type": "angular"
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/*",
+      "proxyUrl": "https://hostwhereservicesare.net/*"
+    }
+  ]
 }

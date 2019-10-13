@@ -25,6 +25,7 @@ export class RestaurantsPage implements OnInit {
   ngOnInit() {
     // Get the geolocalisaition information from the API
     this.googleService.getGeolocalisation().subscribe(result => {
+      console.log(result)
       this.coordinates = result['location'];
       this.googleService.getAdressFromGPS(this.coordinates.lat, this.coordinates.lng).subscribe(result => {
         console.log(result)

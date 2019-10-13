@@ -1,6 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>restaurants</ion-title>
+<ion-header translucent>
+  <ion-toolbar color="tertiary">
+    <ion-buttons slot="start">
+      <ion-button disabled="true">
+        <ion-icon slot="icon-only" os="ios-restaurant" md="md-restaurant"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Mes restaurants</ion-title>
+
+<!--  <ion-buttons slot="primary">
+      <ion-button disabled="true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+
   </ion-toolbar>
 </ion-header>
 
@@ -32,15 +45,11 @@
     </ion-item>
   </ion-item-group>
 
-  {{ address }}
-  {{ min_rate }}
-  {{ min_nb_reviews }}
-  {{ is_open }}
 
 
-  <ion-button expand="full" (click)="launchRestaurantSearch()" color="danger">
-    <ion-icon name="open" slot="start" ></ion-icon>
-    Search
+  <ion-button expand="block" shape="round" (click)="launchRestaurantSearch()" color="tertiary">
+    <ion-icon name="pin" slot="start" ></ion-icon>
+    Recherche
   </ion-button>
 
   <ion-list>
@@ -48,23 +57,27 @@
       <ion-avatar slot="start" *ngIf="item.photos">
         <img [src]="'https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=' + item.photos[0].photo_reference + '&sensor=false&key=' + api_key">
       </ion-avatar>
-
       <ion-label text-wrap>
-        <h3>{{ item.name }}</h3>
-        {{ item.vicinity }}
-        <span *ngIf="item.rating"> {{ item.rating.toFixed(1) }} </span>
-        {{ item.user_ratings_total }}
-        {{ item.price_level}}
+        <h3><b> {{ item.name }} </b> <br>
+        <ion-icon name="pin" slot="start" > </ion-icon>
+        {{ item.vicinity }} <br>
+        <ion-rating
+              *ngIf="item.rating"
+              [rate]="item.rating"
+              readonly="true"
+              size="small"
+              style="vertical-align: middle;">
+        </ion-rating>
+        <b *ngIf="item.rating"> {{ item.rating.toFixed(1) }} </b> <br>
+        {{ item.user_ratings_total }} commentaires </h3>
+        {{ item.price_level}}
       </ion-label>
     </ion-item>
   </ion-list>
-
   <ion-infinite-scroll threshold="100px" (ionInfinite)="nextPageRestaurants($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-
-
 </ion-content>

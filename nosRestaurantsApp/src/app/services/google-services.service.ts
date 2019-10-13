@@ -49,6 +49,22 @@ export class GoogleService {
   }
 
   /**
+  * Get GPS coordinates from address
+  * @returns Observable with detailed Adresse information
+  */
+  getGPSFromAddress(address) {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Accept": 'application/json',
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.get(`https://cors-anywhere.herokuapp.com/${this.googleGeolocAddressUrl}?address=${address}&key=${this.apiKey}`, {}, httpOptions);
+  }
+
+
+
+  /**
   * Get restaurants from the google maps
   * map the result to return only the results that we need
   *
@@ -72,5 +88,18 @@ export class GoogleService {
     else {
       return this.http.get(`https://cors-anywhere.herokuapp.com/${this.googleGetPlacesUrl}?location=${location}&rankby=distance&type=restaurant&key=${this.apiKey}`, httpOptions)
     }
+  }
+
+  getNextPageRestaurants(next_page_token: string): Observable<any> {
+    var httpOptions = {
+      headers: new HttpHeaders({
+        "Accept": 'application/json',
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT'
+      })
+    };
+    return this.http.get(`https://cors-anywhere.herokuapp.com/${this.googleGetPlacesUrl}?pagetoken=${next_page_token}&key=${this.apiKey}`, httpOptions)
   }
 }

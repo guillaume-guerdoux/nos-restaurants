@@ -59,7 +59,7 @@ export class GoogleService {
         'Content-Type':  'application/json'
       })
     };
-    return this.http.get(`https://cors-anywhere.herokuapp.com/${this.googleGeolocAddressUrl}?address=${address}&key=${this.apiKey}`, {}, httpOptions);
+    return this.http.get(`https://cors-anywhere.herokuapp.com/${this.googleGeolocAddressUrl}?address=${address}&key=${this.apiKey}`, httpOptions);
   }
 
 

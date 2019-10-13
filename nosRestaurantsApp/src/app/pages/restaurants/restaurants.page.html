@@ -14,11 +14,11 @@
   <ion-searchbar [(ngModel)]="address" placeholder="Votre adresse" (ionBlur)="consoleChanged()"></ion-searchbar>
   <ion-item>
     <ion-label>Minimum de notre</ion-label>
-    <ion-input [(ngModel)]="min_rate"></ion-input>
+    <ion-input type="number" [(ngModel)]="min_rate"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Minimum d'avis</ion-label>
-    <ion-input [(ngModel)]="min_nb_reviews"></ion-input>
+    <ion-input type="number" [(ngModel)]="min_nb_reviews"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>Ouvert ?</ion-label>

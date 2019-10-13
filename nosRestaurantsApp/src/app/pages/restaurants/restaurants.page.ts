@@ -46,7 +46,9 @@ export class RestaurantsPage implements OnInit {
   min_nb_reviews = 0;
   is_open = true;
   restaurants_results: Observable<any>;
-  api_key = "AIzaSyBMcrzDkykbrg8iIoXnkmWVxdFmBcg48V0"
+  api_key = "AIzaSyBMcrzDkykbrg8iIoXnkmWVxdFmBcg48V0";
+
+  rate=2;
 
   constructor(private googleService: GoogleService) { }
 
@@ -66,17 +68,18 @@ export class RestaurantsPage implements OnInit {
     this.googleService.getRestaurants(String(this.coordinates.lat) + ',' + String(this.coordinates.lng), this.is_open)
       .subscribe(result => {
         var temp_restaurants = result['results'];
-        var final_restaurants = {}
-        /*if (min_rate = 0 and min_nb_reviews = 0) {
-          this.restaurants_results = temp_restaurants
+        var final_restaurants = [];
+        if (this.min_rate === 0 && this.min_nb_reviews === 0) {
+          final_restaurants = temp_restaurants;
         }
         else {
-          for (var restaurant in temp_restaurants) {
-            if ()
-          }
-        }*/
-
-        this.restaurants_results = result['results'];
+          temp_restaurants.forEach((restaurant, index)=>{
+            if (restaurant.rating && restaurant.rating > this.min_rate && restaurant.user_ratings_total && restaurant.user_ratings_total > this.min_nb_reviews){
+              final_restaurants.push(restaurant);
+            }
+          });
+        }
+        this.restaurants_results = final_restaurants;
         console.log(this.restaurants_results)
       });
   }

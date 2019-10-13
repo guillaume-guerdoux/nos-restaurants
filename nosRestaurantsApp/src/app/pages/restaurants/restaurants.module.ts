@@ -7,6 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { RestaurantsPage } from './restaurants.page';
 
+import { IonicRatingModule } from 'ionic-rating';
+
 const routes: Routes = [
   {
     path: '',
@@ -16,6 +18,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    IonicRatingModule,
     CommonModule,
     FormsModule,
     IonicModule,
